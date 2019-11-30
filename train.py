@@ -182,15 +182,10 @@ def train_model(train, model):
     # This tends to happen for floor_count IF one filters on building_id
     # As a workaround, let's set the floor number to 1 for now
 
-
+    if train['floor_count'].count() == 0:
+        train['floor_count'] = 1
     imp.fit(train)
-
-    print(train.head())
     train_numpy = pd.DataFrame(imp.transform(train))
-
-    print(train_numpy.head())
-
-    print(train_numpy.shape)
     train_numpy.columns = train.columns
     train = train_numpy
 
